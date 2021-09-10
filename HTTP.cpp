@@ -15,10 +15,31 @@ namespace custom_libraries
                                     RX_PIN,
                                     TX_PIN,
                                     baudrate){
-        /* Implement constructor here */
+        /* Initialize serial communication */
+        initialize();
      }
 
-     HTTP::~HTTP(){
+    void HTTP::send_sms(char* phone_number, char* payload){
+        char sms_mode[] = "AT+CMGF=1\r";
+        char config_number[] = "AT+CMGS=\"";
+        char recipient_number[15];
+        char command_termination[] = "\"\r";
+        char send_payload[1024];
+        char term = (char)26;
+        strcpy(recipient_number,phone_number);
+        strcat(config_number,recipient_number);
+        strcat(config_number,command_termination);
+        strcpy(send_payload,payload);
+
+        print(sms_mode);
+        print(config_number);
+        print(payload);
+        print(&term);
+        println("");
+
+    }
+
+    HTTP::~HTTP(){
          /* Implement destructor here */
      }
     

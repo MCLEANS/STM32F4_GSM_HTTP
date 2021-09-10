@@ -2,6 +2,7 @@
 #define _HTTP_H
 
 #include "USART.h"
+#include <string.h>
 
 namespace custom_libraries
 {
@@ -17,6 +18,7 @@ namespace custom_libraries
 				uint8_t RX_PIN,
 				uint8_t TX_PIN,
 				int baudrate);
+            void send_sms(char* phone_number, char* payload);
             ~HTTP();
 
     };
