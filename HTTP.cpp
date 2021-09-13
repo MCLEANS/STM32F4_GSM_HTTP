@@ -19,6 +19,11 @@ namespace custom_libraries
         initialize();
         
      }
+    
+    void HTTP::delay_ms(uint16_t duration){
+        duration_counter = 0;
+        while(duration_counter < duration){}
+    }
 
     void HTTP::send_sms(char* phone_number, char* payload){
         char sms_mode[] = "AT+CMGF=1\r";
@@ -33,11 +38,11 @@ namespace custom_libraries
         strcpy(send_payload,payload);
 
         print(sms_mode);
-        for(volatile int i = 0; i < 1000000; i++){}
+        delay_ms(200);
         print(config_number);
-        for(volatile int i = 0; i < 1000000; i++){}
+        delay_ms(200);
         print(send_payload);
-        for(volatile int i = 0; i < 1000000; i++){}
+        delay_ms(200);
         print(&term);
         println(" ");
 
