@@ -17,6 +17,7 @@ namespace custom_libraries
                                     baudrate){
         /* Initialize serial communication */
         initialize();
+        
      }
 
     void HTTP::send_sms(char* phone_number, char* payload){
@@ -32,10 +33,13 @@ namespace custom_libraries
         strcpy(send_payload,payload);
 
         print(sms_mode);
+        for(volatile int i = 0; i < 1000000; i++){}
         print(config_number);
-        print(payload);
+        for(volatile int i = 0; i < 1000000; i++){}
+        print(send_payload);
+        for(volatile int i = 0; i < 1000000; i++){}
         print(&term);
-        println("");
+        println(" ");
 
     }
 
