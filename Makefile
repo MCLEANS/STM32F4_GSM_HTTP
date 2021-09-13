@@ -5,6 +5,7 @@ CXX_SOURCES = main.cpp
 CXX_SOURCES += clockconfig.cpp
 CXX_SOURCES += USART.cpp
 CXX_SOURCES += HTTP.cpp
+CXX_SOURCES += Timerconfiguration.cpp
 
 #C SOURCE FILES
 #SOURCES  = main.c
