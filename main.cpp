@@ -26,7 +26,7 @@ int main(void) {
   NVIC_SetPriority(TIM7_IRQn,0x01);
   NVIC_EnableIRQ(TIM7_IRQn);
 
-  GSM.send_sms("+254719881926","HELLO WORLD");
+  GSM.send_sms("+254719881926","SYSTEM_TEST");
 
   while(1){
 

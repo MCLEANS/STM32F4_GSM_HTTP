@@ -20,9 +20,8 @@ namespace custom_libraries
         
      }
     
-    void HTTP::delay_ms(uint16_t duration){
-        duration_counter = 0;
-        while(duration_counter < duration){}
+    void HTTP::pseudo_delay(uint64_t duration){
+        for(volatile int i = 0; i < duration; i++){}
     }
 
     void HTTP::send_sms(char* phone_number, char* payload){
@@ -36,16 +35,13 @@ namespace custom_libraries
         strcat(config_number,recipient_number);
         strcat(config_number,command_termination);
         strcpy(send_payload,payload);
-
         print(sms_mode);
-        delay_ms(200);
+        pseudo_delay(100000); //The delay value of 100,000 was arrived at by experimentation
         print(config_number);
-        delay_ms(200);
+        pseudo_delay(100000);
         print(send_payload);
-        delay_ms(200);
+        pseudo_delay(100000);
         print(&term);
-        println(" ");
-
     }
 
     HTTP::~HTTP(){

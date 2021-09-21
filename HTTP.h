@@ -9,9 +9,9 @@ namespace custom_libraries
     class HTTP : public USART{
         private:
         private:
-            void delay_ms(uint16_t duration);
+            void pseudo_delay(uint64_t duration);
         public:
-            uint16_t duration_counter;
+            uint64_t duration_counter;
         public:
             HTTP(USART_TypeDef *_USART,
 				GPIO_TypeDef *GPIO,
