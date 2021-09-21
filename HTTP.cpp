@@ -17,8 +17,197 @@ namespace custom_libraries
                                     baudrate){
         /* Initialize serial communication */
         initialize();
-        
      }
+    
+    bool HTTP::available(){
+        if(DMA_STREAM == DMA1_Stream0 || DMA_STREAM == DMA2_Stream0){
+            if(DMA_STREAM == DMA1_Stream0){
+                if(DMA1->LISR & DMA_LISR_TCIF0) {
+                    this->is_available = true;
+                     /* Clear flag by writing 1 to the DMA_LIFCR register */
+                    DMA1->LIFCR |= DMA_LIFCR_CTCIF0;
+                }
+                else{
+                   
+                }
+            }
+            if(DMA_STREAM == DMA2_Stream0){
+                if(DMA2->LISR & DMA_LISR_TCIF0) {
+                    this->is_available = true;
+                     /* Clear flag by writing 1 to the DMA_LIFCR register */
+                    DMA2->LIFCR |= DMA_LIFCR_CTCIF0;
+                }
+                else{
+                    
+                }
+            }
+
+        }
+
+        if(DMA_STREAM == DMA1_Stream1 || DMA_STREAM == DMA2_Stream1){
+            if(DMA_STREAM == DMA1_Stream1){
+                if(DMA1->LISR & DMA_LISR_TCIF1) {
+                    this->is_available = true;
+                     /* Clear flag by writing 1 to the DMA_LIFCR register */
+                    DMA1->LIFCR |= DMA_LIFCR_CTCIF1;
+                }
+                else{
+                    
+                }
+            }
+            if(DMA_STREAM == DMA2_Stream1){
+                if(DMA2->LISR & DMA_LISR_TCIF1) {
+                    this->is_available = true;
+                     /* Clear flag by writing 1 to the DMA_LIFCR register */
+                    DMA2->LIFCR |= DMA_LIFCR_CTCIF1;
+                }
+                else{
+                    
+                }
+            }
+        }
+        if(DMA_STREAM == DMA1_Stream2 || DMA_STREAM == DMA2_Stream2){
+            if(DMA_STREAM == DMA1_Stream2){
+                if(DMA1->LISR & DMA_LISR_TCIF2) {
+                    this->is_available = true;
+                     /* Clear flag by writing 1 to the DMA_LIFCR register */
+                    DMA1->LIFCR |= DMA_LIFCR_CTCIF2;
+                }
+                else{
+                    
+                }
+            }
+            if(DMA_STREAM == DMA2_Stream2){
+                if(DMA2->LISR & DMA_LISR_TCIF2) {
+                    this->is_available = true;
+                     /* Clear flag by writing 1 to the DMA_LIFCR register */
+                    DMA2->LIFCR |= DMA_LIFCR_CTCIF2;
+                }
+                else{
+                    
+                }
+            }
+        }
+        if(DMA_STREAM == DMA1_Stream3 || DMA_STREAM == DMA2_Stream3){
+            if(DMA_STREAM == DMA1_Stream3){
+                if(DMA1->LISR & DMA_LISR_TCIF3) {
+                    this->is_available = true;
+                     /* Clear flag by writing 1 to the DMA_LIFCR register */
+                    DMA1->LIFCR |= DMA_LIFCR_CTCIF3;
+                }
+                else{
+                    
+                }
+            }
+            if(DMA_STREAM == DMA2_Stream3){
+                if(DMA2->LISR & DMA_LISR_TCIF3) {
+                    this->is_available = true;
+                     /* Clear flag by writing 1 to the DMA_LIFCR register */
+                    DMA2->LIFCR |= DMA_LIFCR_CTCIF3;
+                }
+                else{
+                    
+                }
+            }
+        }
+        if(DMA_STREAM == DMA1_Stream4 || DMA_STREAM == DMA2_Stream4){
+            if(DMA_STREAM == DMA1_Stream4){
+                if(DMA1->HISR & DMA_HISR_TCIF4) {
+                    this->is_available = true;
+                     /* Clear flag by writing 1 to the DMA_LIFCR register */
+                    DMA1->HIFCR |= DMA_HIFCR_CTCIF4;
+                }
+                else{
+                    
+                }
+            }
+            if(DMA_STREAM == DMA2_Stream4){
+                if(DMA2->HISR & DMA_HISR_TCIF4) {
+                    this->is_available = true;
+                     /* Clear flag by writing 1 to the DMA_LIFCR register */
+                    DMA2->HIFCR |= DMA_HIFCR_CTCIF4;
+                }
+                else{
+                    
+                }
+            }
+        }
+
+        if(DMA_STREAM == DMA1_Stream5 || DMA_STREAM == DMA2_Stream5){
+            if(DMA_STREAM == DMA1_Stream5){
+                if(DMA1->HISR & DMA_HISR_TCIF5) {
+                    this->is_available = true;
+                     /* Clear flag by writing 1 to the DMA_LIFCR register */
+                    DMA1->HIFCR |= DMA_HIFCR_CTCIF5;
+                }
+                else{
+                    
+                }
+            }
+            if(DMA_STREAM == DMA2_Stream5){
+                if(DMA2->HISR & DMA_HISR_TCIF5) {
+                    this->is_available = true;
+                     /* Clear flag by writing 1 to the DMA_LIFCR register */
+                    DMA2->HIFCR |= DMA_HIFCR_CTCIF5;
+                }
+                else{
+                    
+                }
+            }
+        }
+
+        if(DMA_STREAM == DMA1_Stream6 || DMA_STREAM == DMA2_Stream6){
+            if(DMA_STREAM == DMA1_Stream6){
+                if(DMA1->HISR & DMA_HISR_TCIF6) {
+                    this->is_available = true;
+                     /* Clear flag by writing 1 to the DMA_LIFCR register */
+                    DMA1->HIFCR |= DMA_HIFCR_CTCIF6;
+                }
+                else{
+                    
+                }
+            }
+            if(DMA_STREAM == DMA2_Stream6){
+                if(DMA2->HISR & DMA_HISR_TCIF6) {
+                    this->is_available = true;
+                     /* Clear flag by writing 1 to the DMA_LIFCR register */
+                    DMA2->HIFCR |= DMA_HIFCR_CTCIF6;
+                }
+                else{
+                    
+                }
+            }
+        }
+
+        if(DMA_STREAM == DMA1_Stream7 || DMA_STREAM == DMA2_Stream7){
+            if(DMA_STREAM == DMA1_Stream7){
+                if(DMA1->HISR & DMA_HISR_TCIF7) {
+                    this->is_available = true;
+                     /* Clear flag by writing 1 to the DMA_LIFCR register */
+                    DMA1->HIFCR |= DMA_HIFCR_CTCIF7;
+                }
+                else{
+                    
+                }
+            }
+            if(DMA_STREAM == DMA2_Stream4){
+                if(DMA2->HISR & DMA_HISR_TCIF7) {
+                    this->is_available = true;
+                     /* Clear flag by writing 1 to the DMA_LIFCR register */
+                    DMA2->HIFCR |= DMA_HIFCR_CTCIF7;
+                }
+                else{
+                    
+                }
+            }
+        }
+
+        return this->is_available;
+    }
+
+    void HTTP::clear_flag(){
+        this->is_available = false;
+    }
     
     void HTTP::pseudo_delay(uint64_t duration){
         for(volatile uint64_t i = 0; i < duration; i++){}
@@ -54,6 +243,10 @@ namespace custom_libraries
         pseudo_delay(100000);
         print(notify_of_new_messages);
         pseudo_delay(100000);
+    }
+
+    void HTTP::read_buffer(char *buffer){
+       
     }
 
     HTTP::~HTTP(){

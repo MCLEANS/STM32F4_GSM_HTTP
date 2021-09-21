@@ -172,6 +172,8 @@ void USART::config_DMA(){
 	DMA_STREAM->PAR = (uint32_t)(&_USART->DR);
 	//Give memory address
 	DMA_STREAM->M0AR = (uint32_t)receive_buffer;
+	//Enable Interrupts
+	DMA_STREAM->CR |= DMA_SxCR_TCIE;
 	//Enable the DMA
 	DMA_STREAM->CR |= DMA_SxCR_EN;
 

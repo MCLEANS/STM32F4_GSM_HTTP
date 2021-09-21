@@ -11,6 +11,8 @@
 #define GSM_BAUDRATE 9600
 #define SERIAL_BAUDRATE 9600
 
+char RECEIVE_BUFFER[BUFFER_SIZE];
+
 custom_libraries::clock_config system_clock;
 custom_libraries::HTTP GSM(USART1,GPIOB,custom_libraries::_DMA2,DMA2_Stream2,GSM_RX,GSM_TX,GSM_BAUDRATE);
 custom_libraries::HTTP Serial(USART3,GPIOD,custom_libraries::_DMA1,DMA1_Stream1,SERIAL_RX,SERIAL_TX,SERIAL_BAUDRATE);
@@ -22,7 +24,13 @@ int main(void) {
   GSM.enable_sms_reception();
 
   while(1){
-    Serial.println(GSM.receive_buffer);
-
+    if(GSM.available()){
+      for(volatile int i = 0; i < 9000000; i++){};
+      Serial.println(GSM.receive_buffer); 
+      GSM.clear_flag(); 
+   }   
+   else{
+     //Serial.println(GSM.receive_buffer);
+   }
   }
 }
