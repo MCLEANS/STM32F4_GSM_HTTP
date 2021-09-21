@@ -11,7 +11,6 @@ namespace custom_libraries
         private:
             void pseudo_delay(uint64_t duration);
         public:
-            uint64_t duration_counter;
         public:
             HTTP(USART_TypeDef *_USART,
 				GPIO_TypeDef *GPIO,
