@@ -21,8 +21,8 @@ namespace custom_libraries
 				uint8_t TX_PIN,
 				int baudrate);
             void send_sms(char* phone_number, char* payload);
+            void enable_sms_reception();
             ~HTTP();
-
     };
 
 } // namespace custom_libaries

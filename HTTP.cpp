@@ -21,7 +21,7 @@ namespace custom_libraries
      }
     
     void HTTP::pseudo_delay(uint64_t duration){
-        for(volatile int i = 0; i < duration; i++){}
+        for(volatile uint64_t i = 0; i < duration; i++){}
     }
 
     void HTTP::send_sms(char* phone_number, char* payload){
@@ -42,6 +42,18 @@ namespace custom_libraries
         print(send_payload);
         pseudo_delay(100000);
         print(&term);
+    }
+
+    void HTTP::enable_sms_reception(){
+        char sms_mode[] = "AT+CMGF=1\r\n";
+        char delete_sms_from_storage[] = "AT+CMGDA=1\r\n";
+        char notify_of_new_messages[] = "AT+CNMI=2,2,0,0,0\r\n";
+        print(sms_mode);
+        pseudo_delay(100000);
+        print(delete_sms_from_storage);
+        pseudo_delay(100000);
+        print(notify_of_new_messages);
+        pseudo_delay(100000);
     }
 
     HTTP::~HTTP(){
