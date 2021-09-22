@@ -21,16 +21,9 @@ int main(void) {
   
   system_clock.initialize();
   Serial.initialize();
-  GSM.enable_sms_reception();
+  //GSM.enable_sms_reception();
 
   while(1){
-    if(GSM.available()){
-      for(volatile int i = 0; i < 9000000; i++){};
-      Serial.println(GSM.receive_buffer); 
-      GSM.clear_flag(); 
-   }   
-   else{
-     //Serial.println(GSM.receive_buffer);
-   }
+    
   }
 }
