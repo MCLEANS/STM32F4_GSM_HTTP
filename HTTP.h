@@ -24,6 +24,7 @@ namespace custom_libraries
             void enable_sms_reception();
             void send_http_json(char* url, char* data);
             void tostring(char str[], int num);
+            int get_size(char *bytes);
             ~HTTP();
     };
 

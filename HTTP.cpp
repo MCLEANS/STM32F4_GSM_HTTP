@@ -58,21 +58,29 @@ namespace custom_libraries
         /* Convert an Integer value to a character array */
     void HTTP::tostring(char str[], int num)
     {
-    int i, rem, len = 0, n;
-    n = num;
-    while (n != 0)
-    {
-        len++; //get length for string/digits in int
-        n = n / 10;
+        int i, rem, len = 0, n;
+        n = num;
+        while (n != 0)
+        {
+            len++; //get length for string/digits in int
+            n = n / 10;
+        }
+        //convert and store in string
+        for (i = 0; i < len; i++)
+        {
+            rem = num % 10;                 //last digit fetched first
+            num = num / 10;                 //continue fetching rest of the digits
+            str[len - (i + 1)] = rem + '0'; //start storing string with max-1 index first
+        }
+        str[len] = '\0'; //null to end the string[max]
     }
-    //convert and store in string
-    for (i = 0; i < len; i++)
-    {
-        rem = num % 10;                 //last digit fetched first
-        num = num / 10;                 //continue fetching rest of the digits
-        str[len - (i + 1)] = rem + '0'; //start storing string with max-1 index first
-    }
-    str[len] = '\0'; //null to end the string[max]
+
+    int HTTP::get_size(char *bytes){
+        int size = 0;
+        for(;*bytes;bytes++){
+            size++;
+        }
+        return size;
     }
 
     void HTTP::send_http_json(char* url, char* data){
@@ -85,41 +93,51 @@ namespace custom_libraries
         strcat(server_address,address_termination);
 
         char data_size_command[] = "AT+HTTPDATA=";
-        char data_size[10];
-        tostring(data_size,sizeof(data));
+        char data_size[5];
+        tostring(data_size,get_size(data));
         char data_size_command_termination[] = ",100000";
 
         strcat(data_size_command,data_size);
         strcat(data_size_command,data_size_command_termination);
 
-
-        println("AT");
+        char command_1[] = "AT";
+        char command_2[] = "AT+SAPBR=3,1,\"Contype\",\"GPRS\"";
+        char command_3[] = "AT+SAPBR=3,1,\"APN\",\"internet\"";
+        char command_4[] = "AT+SAPBR=1,1";
+        char command_5[] = "AT+SAPBR=2,1";
+        char command_6[] = "AT+HTTPINIT";
+        char command_7[] = "AT+HTTPPARA=\"CID\",1";
+        char command_8[] = "AT+HTTPPARA=\"CONTENT\",\"application/json\"";
+        char command_9[] = "AT+HTTPACTION=1";
+        char command_10[] = "AT+HTTPREAD";
+        char command_11[] = "AT+HTTPTERM";
+        println(command_1);
         pseudo_delay(100000);
-        println("AT+SAPBR=3,1,\"Contype\",\"GPRS\"");
+        println(command_2);
         pseudo_delay(100000);
-        println("AT+SAPBR=3,1,\"APN\",\"internet\"");//APN
+        println(command_3);//APN
         pseudo_delay(100000);
-        println("AT+SAPBR=1,1");
+        println(command_4);
         pseudo_delay(100000);
-        println("AT+SAPBR=2,1");
+        println(command_5);
         pseudo_delay(100000);
-        println("AT+HTTPINIT");
+        println(command_6);
         pseudo_delay(100000);
-        println("AT+HTTPPARA=\"CID\",1");
+        println(command_7);
         pseudo_delay(100000);
         println(server_address); //Server address
         pseudo_delay(100000);
-        println("AT+HTTPPARA=\"CONTENT\",\"application/json\"");
+        println(command_8);
         pseudo_delay(100000);
         println(data_size_command);
         pseudo_delay(100000);
         println(data);
         pseudo_delay(100000);
-        println("AT+HTTPACTION=1");
+        println(command_9);
         pseudo_delay(100000);
-        println("AT+HTTPREAD");
+        println(command_10);
         pseudo_delay(100000);
-        println("AT+HTTPTERM");
+        println(command_11);
         pseudo_delay(100000);
     }
 
