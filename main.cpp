@@ -21,8 +21,7 @@ int main(void) {
   
   system_clock.initialize();
   Serial.initialize();
-  //GSM.enable_sms_reception();
-
+  
   while(1){
     
   }

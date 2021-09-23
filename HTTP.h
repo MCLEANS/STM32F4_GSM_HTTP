@@ -22,9 +22,6 @@ namespace custom_libraries
 				int baudrate);
             void send_sms(char* phone_number, char* payload);
             void enable_sms_reception();
-            void read_buffer(char *buffer);
-            bool available();
-            void clear_flag();
             ~HTTP();
     };
 

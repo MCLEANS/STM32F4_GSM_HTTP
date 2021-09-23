@@ -27,6 +27,7 @@ private:
 	USART_TypeDef *_USART;
 	GPIO_TypeDef *GPIO;
 	_DMA ACTUAL_DMA;
+	DMA_Stream_TypeDef *DMA_STREAM;
 	uint8_t RX_PIN;
 	uint8_t TX_PIN;
 	int baudrate;
@@ -37,7 +38,6 @@ private:
 	void config_DMA();
 	void reset_DMA();
 public:
-	DMA_Stream_TypeDef *DMA_STREAM;
 	char receive_buffer[BUFFER_SIZE];
 public:
 	USART(USART_TypeDef *_USART,
