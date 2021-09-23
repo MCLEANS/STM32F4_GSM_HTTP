@@ -55,8 +55,72 @@ namespace custom_libraries
         pseudo_delay(100000);
     }
 
+        /* Convert an Integer value to a character array */
+    void HTTP::tostring(char str[], int num)
+    {
+    int i, rem, len = 0, n;
+    n = num;
+    while (n != 0)
+    {
+        len++; //get length for string/digits in int
+        n = n / 10;
+    }
+    //convert and store in string
+    for (i = 0; i < len; i++)
+    {
+        rem = num % 10;                 //last digit fetched first
+        num = num / 10;                 //continue fetching rest of the digits
+        str[len - (i + 1)] = rem + '0'; //start storing string with max-1 index first
+    }
+    str[len] = '\0'; //null to end the string[max]
+    }
+
     void HTTP::send_http_json(char* url, char* data){
-        
+
+        char server_address[] = "AT+HTTPPARA=\"URL\",\"";
+        char address_termination[] = "\"";
+        char target_url[50];
+        strcpy(target_url,url);
+        strcat(server_address,target_url);
+        strcat(server_address,address_termination);
+
+        char data_size_command[] = "AT+HTTPDATA=";
+        char data_size[10];
+        tostring(data_size,sizeof(data));
+        char data_size_command_termination[] = ",100000";
+
+        strcat(data_size_command,data_size);
+        strcat(data_size_command,data_size_command_termination);
+
+
+        println("AT");
+        pseudo_delay(100000);
+        println("AT+SAPBR=3,1,\"Contype\",\"GPRS\"");
+        pseudo_delay(100000);
+        println("AT+SAPBR=3,1,\"APN\",\"internet\"");//APN
+        pseudo_delay(100000);
+        println("AT+SAPBR=1,1");
+        pseudo_delay(100000);
+        println("AT+SAPBR=2,1");
+        pseudo_delay(100000);
+        println("AT+HTTPINIT");
+        pseudo_delay(100000);
+        println("AT+HTTPPARA=\"CID\",1");
+        pseudo_delay(100000);
+        println(server_address); //Server address
+        pseudo_delay(100000);
+        println("AT+HTTPPARA=\"CONTENT\",\"application/json\"");
+        pseudo_delay(100000);
+        println(data_size_command);
+        pseudo_delay(100000);
+        println(data);
+        pseudo_delay(100000);
+        println("AT+HTTPACTION=1");
+        pseudo_delay(100000);
+        println("AT+HTTPREAD");
+        pseudo_delay(100000);
+        println("AT+HTTPTERM");
+        pseudo_delay(100000);
     }
 
     HTTP::~HTTP(){

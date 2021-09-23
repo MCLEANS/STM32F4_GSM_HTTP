@@ -23,6 +23,7 @@ namespace custom_libraries
             void send_sms(char* phone_number, char* payload);
             void enable_sms_reception();
             void send_http_json(char* url, char* data);
+            void tostring(char str[], int num);
             ~HTTP();
     };
 
