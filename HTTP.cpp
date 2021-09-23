@@ -55,6 +55,10 @@ namespace custom_libraries
         pseudo_delay(100000);
     }
 
+    void HTTP::send_http_json(char* url, char* data){
+        
+    }
+
     HTTP::~HTTP(){
          /* Implement destructor here */
      }
