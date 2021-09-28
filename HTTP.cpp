@@ -83,7 +83,7 @@ namespace custom_libraries
         return size;
     }
 
-    void HTTP::send_http_json(char* url, char* data){
+    void HTTP::post_http_json(char* url, char* data){
 
         char server_address[512] = "AT+HTTPPARA=\"URL\",\"";
         char address_termination[] = "\"";
@@ -101,8 +101,8 @@ namespace custom_libraries
         strcat(data_size_command,data_size_command_termination);
 
         char command_1[] = "AT";
-        char command_2[] = "AT+SAPBR=3,1,\"Contype\",\"GPRS\"";
-        char command_3[] = "AT+SAPBR=3,1,\"APN\",\"internet\"";
+        char command_2[] = "AT+SAPBR=3,1,\"Contype\",\"GPRS\""; //setting the SAPBR,connection type is GPRS
+        char command_3[] = "AT+SAPBR=3,1,\"APN\",\"internet\""; //setting the APN,2nd parameter empty works for all networks
         char command_4[] = "AT+SAPBR=1,1";
         char command_5[] = "AT+SAPBR=2,1";
         char command_6[] = "AT+HTTPINIT";
@@ -135,6 +135,53 @@ namespace custom_libraries
         pseudo_delay(100000);
         println(command_9);
         pseudo_delay(100000);
+        println(command_10);
+        pseudo_delay(100000);
+        println(command_11);
+        pseudo_delay(100000);
+    }
+
+    void HTTP::get_http_json(char* url){
+         char server_address[512] = "AT+HTTPPARA=\"URL\",\"";
+        char address_termination[] = "\"";
+        char target_url[100];
+        strcpy(target_url,url);
+        strcat(server_address,target_url);
+        strcat(server_address,address_termination);
+
+        char command_1[] = "AT";
+        char command_5[] = "AT+CGATT=1";
+        char command_2[] = "AT+SAPBR=3,1,\"Contype\",\"GPRS\"";
+        char command_3[] = "AT+SAPBR=3,1,\"APN\",\"internet\"";
+        char command_4[] = "AT+SAPBR=1,1";
+        char command_6[] = "AT+HTTPINIT";
+        char command_7[] = "AT+HTTPPARA=\"CID\",1";
+        char command_9[] = "AT+HTTPACTION=0";
+        char command_10[] = "AT+HTTPREAD";
+        char command_11[] = "AT+HTTPTERM";
+        char command_12[] = "AT+CFUN?";
+
+        println(command_1);
+        pseudo_delay(100000);
+        println(command_12);
+        pseudo_delay(100000);
+        println(command_5);
+        pseudo_delay(100000);
+        println(command_2);
+        pseudo_delay(100000);
+        println(command_3);//APN
+        pseudo_delay(100000);
+        println(command_4);
+        pseudo_delay(100000);
+        println(command_6);
+        pseudo_delay(100000);
+        println(command_7);
+        pseudo_delay(100000);
+        println(server_address); //Server address
+        pseudo_delay(100000);
+        println(command_9);
+        pseudo_delay(40000000);
+        flush_buffer();
         println(command_10);
         pseudo_delay(100000);
         println(command_11);
