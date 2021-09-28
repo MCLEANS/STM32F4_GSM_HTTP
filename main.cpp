@@ -21,8 +21,22 @@ int main(void) {
   
   system_clock.initialize();
   Serial.initialize();
-  
+   /* Enable Serial reception from GSM */
+  GSM.enable_sms_reception();
+
   while(1){
+
+    /* Check if data has been received in USART data register */
+    if(USART1->SR & USART_SR_RXNE){
+      /* Short delay */
+      for(volatile int i = 0; i < 100000; i++){}
+      /* Print out data in the receive buffer */
+      Serial.println(GSM.receive_buffer);
+      /*Clear serial buffer */
+      GSM.flush_buffer();
+      /* clear flag */
+      USART1->SR &= ~USART_SR_RXNE;
+    }
     
   }
 }
