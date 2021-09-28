@@ -126,7 +126,7 @@ namespace custom_libraries
         println(command_7);
         pseudo_delay(100000);
         println(server_address); //Server address
-        pseudo_delay(500000);
+        pseudo_delay(100000);
         println(command_8);
         pseudo_delay(100000);
         println(data_size_command);

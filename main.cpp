@@ -12,7 +12,7 @@
 #define SERIAL_BAUDRATE 9600
 
 char URL[] = "http://predict-data-api.herokuapp.com/data/jj0qlj6x09j";
-char PAYLOAD[] = "{\"xClockWise\":\"56\",\"xAntiClockWise\":\"9\",\"yClockWise\":\"56\",\"yAntiClockWise\":\"0\",\"vibration\":\"223\",\"noise\":\"0\"}";
+char PAYLOAD[] = "{\"xClockWise\":\"56\",\"xAntiClockWise\":\"90\",\"yClockWise\":\"56\",\"yAntiClockWise\":\"40\",\"vibration\":\"223\",\"noise\":\"0\"}";
 
 char RECEIVE_BUFFER[BUFFER_SIZE];
 
