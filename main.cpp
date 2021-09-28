@@ -11,6 +11,9 @@
 #define GSM_BAUDRATE 9600
 #define SERIAL_BAUDRATE 9600
 
+char URL[] = "http://predict-data-api.herokuapp.com/data/jj0qlj6x09j";
+char PAYLOAD[] = "{\"xClockWise\":\"56\",\"xAntiClockWise\":\"9\",\"yClockWise\":\"56\",\"yAntiClockWise\":\"0\",\"vibration\":\"223\",\"noise\":\"0\"}";
+
 char RECEIVE_BUFFER[BUFFER_SIZE];
 
 custom_libraries::clock_config system_clock;
@@ -22,10 +25,12 @@ int main(void) {
   system_clock.initialize();
   Serial.initialize();
    /* Enable Serial reception from GSM */
-  GSM.enable_sms_reception();
+  //GSM.enable_sms_reception();
+  GSM.send_http_json(URL,PAYLOAD);
 
   while(1){
-
+  
+    /* ------------START GSM RECPTION----------------------*/
     /* Check if data has been received in USART data register */
     if(USART1->SR & USART_SR_RXNE){
       /* Short delay */
@@ -37,6 +42,7 @@ int main(void) {
       /* clear flag */
       USART1->SR &= ~USART_SR_RXNE;
     }
-    
+    /* ------------END GSM RECPTION----------------------*/
+   
   }
 }

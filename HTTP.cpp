@@ -85,14 +85,14 @@ namespace custom_libraries
 
     void HTTP::send_http_json(char* url, char* data){
 
-        char server_address[] = "AT+HTTPPARA=\"URL\",\"";
+        char server_address[512] = "AT+HTTPPARA=\"URL\",\"";
         char address_termination[] = "\"";
-        char target_url[50];
+        char target_url[100];
         strcpy(target_url,url);
         strcat(server_address,target_url);
         strcat(server_address,address_termination);
 
-        char data_size_command[] = "AT+HTTPDATA=";
+        char data_size_command[512] = "AT+HTTPDATA=";
         char data_size[5];
         tostring(data_size,get_size(data));
         char data_size_command_termination[] = ",100000";
@@ -126,7 +126,7 @@ namespace custom_libraries
         println(command_7);
         pseudo_delay(100000);
         println(server_address); //Server address
-        pseudo_delay(100000);
+        pseudo_delay(500000);
         println(command_8);
         pseudo_delay(100000);
         println(data_size_command);
